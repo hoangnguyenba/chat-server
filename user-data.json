@@ -1,0 +1,10 @@
+[
+    {
+        "id" : "user1",
+        "name"    : "Ronaldo"
+    },
+    {
+        "id" : "user2",
+        "name"    : "Messi"
+    }
+]
