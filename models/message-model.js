@@ -1,15 +1,15 @@
 var db = require("../app").db;
  
-var TABLE_NAME = "Messages";
+var TABLE_NAME = "Message";
 function MessageModel() { };
  
 MessageModel.create = function(data, callback) {
     var params = {
         TableName: TABLE_NAME,
         Item: {
-            "thread_id":  'user1:user2',
+            "thread_id":  data.message.thread.id,
             "created_at":  new Date().getTime(),
-            "author"   :  'user1',
+            "author"   :  data.message.author.id,
             "text"   :  data.message.text
         }
     };
@@ -19,7 +19,7 @@ MessageModel.create = function(data, callback) {
            console.error("Unable to add message", data.message.text, ". Error JSON:", JSON.stringify(err, null, 2));
            return callback(err, null);
        }
-       console.log("PutItem succeeded:", data.message.text);
+       console.log("PutItem succeeded:", JSON.stringify(data, null, 2));
        callback(null, data_dynamo);
     });
 }

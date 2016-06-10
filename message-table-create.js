@@ -8,7 +8,7 @@ AWS.config.update({
 var dynamodb = new AWS.DynamoDB();
 
 var params = {
-    TableName : "Messages",
+    TableName : "Message",
     KeySchema: [       
         { AttributeName: "thread_id", KeyType: "HASH"},  //Partition key
         { AttributeName: "created_at", KeyType: "RANGE" }  //Sort key
