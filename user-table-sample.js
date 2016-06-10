@@ -1,3 +1,5 @@
+var bcrypt = require('bcrypt');
+
 var AWS = require("aws-sdk");
 var fs = require('fs');
 
@@ -12,6 +14,7 @@ console.log("Importing messages into DynamoDB. Please wait.");
 
 var allMessages = JSON.parse(fs.readFileSync('user-data.json', 'utf8'));
 allMessages.forEach(function(user) {
+
     var params = {
         TableName: "User",
         Item: {
@@ -20,13 +23,19 @@ allMessages.forEach(function(user) {
         }
     };
 
-    console.log(JSON.stringify(params));
+    bcrypt.hash(user.pass, 10, function(err, hash) {
+        // Store hash in your password DB.
+        console.log(JSON.stringify(params));
 
-    docClient.put(params, function(err, data) {
-       if (err) {
-           console.error("Unable to add user", user.text, ". Error JSON:", JSON.stringify(err, null, 2));
-       } else {
-           console.log("PutItem succeeded:", user.text);
-       }
+        docClient.put(params, function(err, data) {
+            if (err) {
+                console.error("Unable to add user", user.name, ". Error JSON:", JSON.stringify(err, null, 2));
+            } else {
+                console.log("PutItem succeeded:", user.name);
+            }
+        });
     });
+
+
+    
 });
