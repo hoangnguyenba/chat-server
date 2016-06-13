@@ -13,10 +13,9 @@ console.log("Importing messages into DynamoDB. Please wait.");
 var allMessages = JSON.parse(fs.readFileSync('message-data.json', 'utf8'));
 allMessages.forEach(function(message) {
     var params = {
-        TableName: "Messages",
+        TableName: "Message",
         Item: {
             "thread_id":  message.thread_id,
-            // "number":  message.number,
             "created_at":  new Date().getTime(),
             "author"   :  message.author,
             "text"   :  message.text

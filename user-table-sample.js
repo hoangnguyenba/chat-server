@@ -23,7 +23,10 @@ allMessages.forEach(function(user) {
         }
     };
 
-    bcrypt.hash(user.pass, 10, function(err, hash) {
+    bcrypt.hash(user.password, 10, function(err, hash) {
+
+        params.Item.password = hash;
+
         // Store hash in your password DB.
         console.log(JSON.stringify(params));
 

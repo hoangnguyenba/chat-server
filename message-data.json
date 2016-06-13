@@ -1,14 +1,22 @@
 [
     {
         "thread_id" : "user1:user2",
-        "number"    : 1,
         "text"      : "Hello",
         "author"    : "user1"
     },
     {
         "thread_id" : "user1:user2",
-        "number"    : 2,
         "text"      : "Hi there",
         "author"    : "user2"
+    },
+    {
+        "thread_id" : "user3:user4",
+        "text"      : "Hom nay the nao ku",
+        "author"    : "user3"
+    },
+    {
+        "thread_id" : "user3:user4",
+        "text"      : "Chien thoi",
+        "author"    : "user4"
     }
 ]

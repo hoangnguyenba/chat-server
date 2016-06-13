@@ -14,7 +14,16 @@ var appRouter = function(app) {
     });
 
     app.get("/get/user/:id", cors(), function(req, res) {
-        UserModel.get(req.params.id,function(error, result) {
+
+        var params = {
+            id: req.params.id,
+            AttributesToGet: [ 
+                'id',
+                'name'
+            ]
+        };
+
+        UserModel.get(params,function(error, result) {
             if(error) {
                 return res.status(400).send(error);
             }

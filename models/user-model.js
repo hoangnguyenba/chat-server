@@ -3,21 +3,25 @@ var db = require("../app").db;
 var TABLE_NAME = "User";
 function UserModel() { };
 
-UserModel.get = function(id, callback) {
-    
-    var params = {
+UserModel.get = function(params, callback) {
+
+    var params_dynamo = {
         TableName: 'User',
         Key: { 
-            id: id
+            id: params.id
         }
     };
 
-    db.get(params, function(err, data_dynamo) {
+    if (typeof(params.AttributesToGet) != "undefined")
+    {
+        params_dynamo.AttributesToGet = params.AttributesToGet;
+    }
+
+    db.get(params_dynamo, function(err, data_dynamo) {
         if(err) {
             console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
             return callback(err, null);
         }
-        console.log("Query succeeded." + JSON.stringify(data_dynamo, null, 2));
         callback(null, data_dynamo);
     });
 

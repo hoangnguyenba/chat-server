@@ -1,10 +1,22 @@
 [
     {
         "id" : "user1",
+        "password": "user1pass",
         "name"    : "Ronaldo"
     },
     {
         "id" : "user2",
+        "password": "user2pass",
         "name"    : "Messi"
+    },
+    {
+        "id" : "user3",
+        "password": "user3pass",
+        "name"    : "Rooney"
+    },
+    {
+        "id" : "user4",
+        "password": "user4pass",
+        "name"    : "Mata"
     }
 ]
