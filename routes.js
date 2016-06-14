@@ -1,10 +1,10 @@
-var MessageModel = require("../models/message-model");
-var UserModel = require("../models/user-model");
-var cors = require('cors');
+var MessageModel = require("./models/message-model");
+var UserModel = require("./models/user-model");
+// var cors = require('cors');
  
-var appRouter = function(app) {
+var appRouter = function(app, passport) {
  
-    app.get("/fetch", cors(), function(req, res) {
+    app.get("/fetch", function(req, res) {
         MessageModel.getAll(req.query.thread_id,function(error, result) {
             if(error) {
                 return res.status(400).send(error);
@@ -13,7 +13,7 @@ var appRouter = function(app) {
         });
     });
 
-    app.get("/get/user/:id", cors(), function(req, res) {
+    app.get("/get/user/:id", function(req, res) {
 
         var params = {
             id: req.params.id,
@@ -30,7 +30,13 @@ var appRouter = function(app) {
             return res.send(result);
         });
     });
+
+    // process the login form
+    app.post('/login', passport.authenticate('local'), function (req, res) {
+        res.json({ status: true, user: req.user });
+    });
  
 };
+
  
 module.exports = appRouter;
