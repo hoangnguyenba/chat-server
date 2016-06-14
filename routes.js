@@ -52,6 +52,10 @@ var appRouter = function(app, passport) {
         res.json({ status: true });
     });
 
+    app.get('/is-auth', isLoggedIn, function(req, res) {
+        res.json({ status: true });
+    });
+
     // =====================================
     // PROFILE SECTION =====================
     // =====================================
