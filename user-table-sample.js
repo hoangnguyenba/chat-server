@@ -1,12 +1,10 @@
-var bcrypt = require('bcrypt');
-
+var config = require('./config/config');
 var AWS = require("aws-sdk");
+AWS.config.update(config.dynamodb);
+
+var bcrypt = require('bcrypt');
 var fs = require('fs');
 
-AWS.config.update({
-    region: "us-west-2",
-    endpoint: "http://localhost:8000"
-});
 
 var docClient = new AWS.DynamoDB.DocumentClient();
 

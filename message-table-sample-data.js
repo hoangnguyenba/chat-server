@@ -1,10 +1,8 @@
+var config = require('./config/config');
 var AWS = require("aws-sdk");
-var fs = require('fs');
+AWS.config.update(config.dynamodb);
 
-AWS.config.update({
-    region: "us-west-2",
-    endpoint: "http://localhost:8000"
-});
+var fs = require('fs');
 
 var docClient = new AWS.DynamoDB.DocumentClient();
 
