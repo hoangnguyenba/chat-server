@@ -65,11 +65,11 @@ module.exports = function(passport) {
 
             // if no user is found, return the message
             if (!user)
-                return done(null, false); 
+                return done(null, false, { message: 'Incorrect username.' } ); 
 
             // if the user is found but the password is wrong
             if (!bcrypt.compareSync(password, user.password))
-                return done(null, false);
+                return done(null, false, { message: 'Incorrect password.' });
 
             delete(user.password);
 
