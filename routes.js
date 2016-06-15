@@ -6,14 +6,10 @@ var jwtCheck     = require('express-jwt')({
   secret: config.jwt_secret
 });
 var bcrypt = require('bcrypt');
-
-// var jwtCheck = jwt({
-//   secret: config.jwt_secret
-// });
  
 var appRouter = function(app, passport) {
  
-    app.get("/fetch", function(req, res) {
+    app.get("/fetch", jwtCheck, function(req, res) {
         MessageModel.getAll(req.query.thread_id,function(error, result) {
             if(error) {
                 return res.status(400).send(error);
@@ -22,7 +18,7 @@ var appRouter = function(app, passport) {
         });
     });
 
-    app.get("/get/user/:id", function(req, res) {
+    app.get("/get/user/:id", jwtCheck, function(req, res) {
 
         var params = {
             id: req.params.id,
@@ -117,13 +113,13 @@ function isLoggedIn(req, res, next) {
         return next();
 
     // if they aren't redirect them to the home page
-    res.json({ status: false, info: "Not logging yet" });
+    res.json({ status: false, info: "Not logged in yet" });
 }
 
 
 function createToken(user) {
   delete user.password;
-  return jwt.sign(user, config.jwt_secret, { expiresIn: 60*2 });
+  return jwt.sign(user, config.jwt_secret, { expiresIn: config.session_time });
 }
  
 module.exports = appRouter;

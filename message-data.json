@@ -2,21 +2,33 @@
     {
         "thread_id" : "user1:user2",
         "text"      : "Hello",
-        "author"    : "user1"
+        "author"    : {
+                "id"    : "user1",
+                "name"  : "Ronaldo"
+            }
     },
     {
         "thread_id" : "user1:user2",
         "text"      : "Hi there",
-        "author"    : "user2"
+        "author"    : {
+                "id"    : "user2",
+                "name"  : "Messi"
+            }
     },
     {
         "thread_id" : "user3:user4",
         "text"      : "Hom nay the nao ku",
-        "author"    : "user3"
+        "author"    : {
+                "id"    : "user3",
+                "name"  : "Rooney"
+            }
     },
     {
         "thread_id" : "user3:user4",
         "text"      : "Chien thoi",
-        "author"    : "user4"
+        "author"    : {
+                "id"    : "user4",
+                "name"  : "Mata"
+            }
     }
 ]
