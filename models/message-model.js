@@ -9,7 +9,7 @@ MessageModel.create = function(data, callback) {
         Item: {
             "thread_id":  data.message.thread.id,
             "created_at":  new Date().getTime(),
-            "author"   :  data.message.author.id,
+            "author"   :  data.message.author,
             "text"   :  data.message.text
         }
     };
