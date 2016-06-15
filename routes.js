@@ -103,7 +103,7 @@ var appRouter = function(app, passport) {
     // =====================================
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
-    app.get('/user/me', isLoggedIn, function(req, res) {
+    app.get('/user/me', jwtCheck, function(req, res) {
         res.json({ status: true, user: req.user });
     });
  
@@ -123,7 +123,7 @@ function isLoggedIn(req, res, next) {
 
 function createToken(user) {
   delete user.password;
-  return jwt.sign(user, config.jwt_secret, { expiresIn: 60*5 });
+  return jwt.sign(user, config.jwt_secret, { expiresIn: 60*2 });
 }
  
 module.exports = appRouter;
