@@ -1,5 +1,15 @@
+var config  = require('./config/config');
 var MessageModel = require("./models/message-model");
 var UserModel = require("./models/user-model");
+var jwt     = require('jsonwebtoken');
+var jwtCheck     = require('express-jwt')({
+  secret: config.jwt_secret
+});
+var bcrypt = require('bcrypt');
+
+// var jwtCheck = jwt({
+//   secret: config.jwt_secret
+// });
  
 var appRouter = function(app, passport) {
  
@@ -33,15 +43,47 @@ var appRouter = function(app, passport) {
     // =====================================
     // LOGIN ===============================
     // =====================================
-    app.post('/login', function(req, res, next) {
-        passport.authenticate('local', function(err, user, info) {
-            if (err) { return next(err); }
-            if (!user) { return res.json({ status: false, info: info }); }
-            req.logIn(user, function(err) {
-                if (err) { return next(err); }
-                res.json({ status: true, user: req.user });
+    // app.post('/login', function(req, res, next) {
+    //     passport.authenticate('local', function(err, user, info) {
+    //         if (err) { return next(err); }
+    //         if (!user) { return res.json({ status: false, info: info }); }
+    //         req.logIn(user, function(err) {
+    //             if (err) { return next(err); }
+    //             res.json({ status: true, user: req.user });
+    //         });
+    //     })(req, res, next);
+    // });
+
+    app.post('/login', function(req, res) {
+
+        var id = req.body.username;
+        var password = req.body.password;
+
+        var params = {
+            id: id,
+        };
+
+        UserModel.get(params,function(error, result) {
+            if(error) {
+                return res.status(400).send(error);
+            }
+            user = result.Item;
+
+            // Check password
+            bcrypt.compare(password, user.password, function(err, result) {
+                if(result)
+                    res.json({ 
+                        status: true, 
+                        id_token: createToken(user) 
+                    });
+                else
+                    res.json({ 
+                        status: false
+                    });
             });
-        })(req, res, next);
+        });
+
+        
     });
 
     // =====================================
@@ -52,7 +94,7 @@ var appRouter = function(app, passport) {
         res.json({ status: true });
     });
 
-    app.get('/is-auth', isLoggedIn, function(req, res) {
+    app.get('/is-auth', jwtCheck, function(req, res) {
         res.json({ status: true });
     });
 
@@ -76,6 +118,12 @@ function isLoggedIn(req, res, next) {
 
     // if they aren't redirect them to the home page
     res.json({ status: false, info: "Not logging yet" });
+}
+
+
+function createToken(user) {
+  delete user.password;
+  return jwt.sign(user, config.jwt_secret, { expiresIn: 60*5 });
 }
  
 module.exports = appRouter;
