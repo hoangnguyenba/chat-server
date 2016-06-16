@@ -70,7 +70,8 @@ var appRouter = function(app, passport) {
                 if(result)
                     res.json({ 
                         status: true, 
-                        id_token: createToken(user) 
+                        id_token: createToken(user),
+                        user: user
                     });
                 else
                     res.json({ 

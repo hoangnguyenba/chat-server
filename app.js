@@ -40,7 +40,6 @@ io.on("connection", function(socket){
     socket.on("chat_message", function(msg){
 
         MessageModel.create(msg, function(error, result) {
-
             if(error) {
                 console.log(JSON.stringify(error));
             }
