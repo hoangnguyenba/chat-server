@@ -39,12 +39,13 @@ io.on("connection", function(socket){
     console.log('a user connected');
     socket.on("chat_message", function(msg){
 
-        MessageModel.create({message: msg}, function(error, result) {
+        MessageModel.create(msg, function(error, result) {
+
             if(error) {
                 console.log(JSON.stringify(error));
             }
             else {
-                // io.emit("chat_message", msg);
+                io.emit("chat_message", MessageModel.createMessageFromClientData(msg));
             }
         });
     });

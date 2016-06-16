@@ -6,17 +6,12 @@ function MessageModel() { };
 MessageModel.create = function(data, callback) {
     var params = {
         TableName: TABLE_NAME,
-        Item: {
-            "thread_id":  data.message.thread.id,
-            "created_at":  new Date().getTime(),
-            "author"   :  data.message.author,
-            "text"   :  data.message.text
-        }
+        Item: this.createMessageFromClientData(data),
     };
 
     db.put(params, function(err, data_dynamo) {
        if(err) {
-           console.error("Unable to add message", data.message.text, ". Error JSON:", JSON.stringify(err, null, 2));
+           console.error("Unable to add message", data.text, ". Error JSON:", JSON.stringify(err, null, 2));
            return callback(err, null);
        }
        console.log("PutItem succeeded:", JSON.stringify(data, null, 2));
@@ -49,5 +44,17 @@ MessageModel.getAll = function(thread_id, callback) {
 
 
 };
+
+MessageModel.createMessageFromClientData = function (data) {
+    console.log('data from client: ');
+    console.log(data);
+    var item =  {
+            "thread_id":  data.thread.id,
+            "created_at":  new Date().getTime(),
+            "author"   :  data.author,
+            "text"   :  data.text
+        }
+    return item;
+}
  
 module.exports = MessageModel;
