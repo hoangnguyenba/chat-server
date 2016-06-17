@@ -103,6 +103,17 @@ var appRouter = function(app, passport) {
     app.get('/user/me', jwtCheck, function(req, res) {
         res.json({ status: true, user: req.user });
     });
+
+    app.get('/user/get-list', function(req, res) {
+        UserModel.getAll(function(error, result) {
+            if(error) {
+                return res.status(400).send(error);
+            }
+            
+            res.json(result);
+            
+        });
+    });
  
 };
 

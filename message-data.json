@@ -16,6 +16,14 @@
             }
     },
     {
+        "thread_id" : "user1:user3",
+        "text"      : "Mai anh ve MU da' nha",
+        "author"    : {
+                "id"    : "user1",
+                "name"  : "Ronaldo"
+            }
+    },
+    {
         "thread_id" : "user3:user4",
         "text"      : "Hom nay the nao ku",
         "author"    : {
