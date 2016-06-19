@@ -5,9 +5,9 @@ var jwt     = require('jsonwebtoken');
 var jwtCheck     = require('express-jwt')({
   secret: config.jwt_secret
 });
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt-nodejs');
  
-var appRouter = function(app, passport) {
+var appRouter = function(app) {
  
     app.get("/fetch", jwtCheck, function(req, res) {
         MessageModel.getAll(req.query.thread_id,function(error, result) {
@@ -39,17 +39,6 @@ var appRouter = function(app, passport) {
     // =====================================
     // LOGIN ===============================
     // =====================================
-    // app.post('/login', function(req, res, next) {
-    //     passport.authenticate('local', function(err, user, info) {
-    //         if (err) { return next(err); }
-    //         if (!user) { return res.json({ status: false, info: info }); }
-    //         req.logIn(user, function(err) {
-    //             if (err) { return next(err); }
-    //             res.json({ status: true, user: req.user });
-    //         });
-    //     })(req, res, next);
-    // });
-
     app.post('/login', function(req, res) {
 
         var id = req.body.username;
@@ -103,20 +92,17 @@ var appRouter = function(app, passport) {
     app.get('/user/me', jwtCheck, function(req, res) {
         res.json({ status: true, user: req.user });
     });
+
+    app.get('/user/get-list', function(req, res) {
+        UserModel.getAll(function(error, result) {
+            if(error) {
+                return res.status(400).send(error);
+            }
+            res.json(result);
+        });
+    });
  
 };
-
-// route middleware to make sure a user is logged in
-function isLoggedIn(req, res, next) {
-
-    // if user is authenticated in the session, carry on 
-    if (req.isAuthenticated())
-        return next();
-
-    // if they aren't redirect them to the home page
-    res.json({ status: false, info: "Not logged in yet" });
-}
-
 
 function createToken(user) {
   delete user.password;

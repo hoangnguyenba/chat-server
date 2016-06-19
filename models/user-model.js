@@ -27,5 +27,22 @@ UserModel.get = function(params, callback) {
 
 
 };
+
+UserModel.getAll = function(callback) {
+
+    var params_dynamo = {
+        TableName: 'User'
+    };
+
+    db.scan(params_dynamo, function(err, data_dynamo) {
+        if(err) {
+            console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+            return callback(err, null);
+        }
+        callback(null, data_dynamo);
+    });
+
+
+};
  
 module.exports = UserModel;
