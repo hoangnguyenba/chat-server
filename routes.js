@@ -9,8 +9,8 @@ var bcrypt = require('bcrypt-nodejs');
  
 var appRouter = function(app) {
  
-    app.get("/fetch", jwtCheck, function(req, res) {
-        MessageModel.getAll(req.query.thread_id,function(error, result) {
+    app.get("/messages/:thread_id", jwtCheck, function(req, res) {
+        MessageModel.getAll(req.params.thread_id,function(error, result) {
             if(error) {
                 return res.status(400).send(error);
             }
@@ -18,7 +18,7 @@ var appRouter = function(app) {
         });
     });
 
-    app.get("/get/user/:id", jwtCheck, function(req, res) {
+    app.get("/user/:id", jwtCheck, function(req, res) {
 
         var params = {
             id: req.params.id,
@@ -93,7 +93,7 @@ var appRouter = function(app) {
         res.json({ status: true, user: req.user });
     });
 
-    app.get('/user/get-list', function(req, res) {
+    app.get('/users', function(req, res) {
         UserModel.getAll(function(error, result) {
             if(error) {
                 return res.status(400).send(error);

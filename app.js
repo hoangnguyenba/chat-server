@@ -1,13 +1,13 @@
-var PORT = 3131;
-
 var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
 var cors = require('cors');
 var morgan       = require('morgan');
-// var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
+
+var port     = process.env.PORT || 3131; // set our port
+
 
 var config = require('./config/config');
 var AWS = require("aws-sdk");
@@ -17,9 +17,13 @@ module.exports.db = new AWS.DynamoDB.DocumentClient();
 
 // set up our express application
 app.use(cors());
-app.use(morgan('dev')); // log every request to the console
-// app.use(cookieParser()); // read cookies (needed for auth)
-app.use(bodyParser()); // get information from html forms
+
+// configure app
+app.use(morgan('dev')); // log requests to the console
+
+// configure body parser
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 
 
@@ -41,6 +45,6 @@ io.on("connection", function(socket){
     });
 });
 
-server.listen(PORT, function(){
+server.listen(port, function(){
   console.log('listening on *:' + server.address().port);
 });
