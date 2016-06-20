@@ -1,2 +1,6 @@
 node_modules
 build/config.gypi
+.tscache
+typings
+npm-debug.log
+des
