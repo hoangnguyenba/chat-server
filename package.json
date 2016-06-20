@@ -4,7 +4,7 @@
   "description": "Chat server using socket.io and dynamodb",
   "main": "index.js",
   "scripts": {
-    "grunt": "grunt",
+    "grunt": "grunt --force",
     "start": "node ./bin/www"
   },
   "author": "Hoang Nguyen",

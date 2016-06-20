@@ -22,6 +22,9 @@
     },
     "body-parser/body-parser.d.ts": {
       "commit": "e325b363f5ee9c72ebde49f1e783ae725f64b7e2"
+    },
+    "aws-sdk/aws-sdk.d.ts": {
+      "commit": "e325b363f5ee9c72ebde49f1e783ae725f64b7e2"
     }
   }
 }

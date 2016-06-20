@@ -2,16 +2,14 @@
 "use strict";
 
 import * as express from "express";
+// import * as users from "./user"
 
-module Route {
+var router = express.Router();
 
-  export class Index {
+router.use("/users", require("./users"));
 
-    public index(req: express.Request, res: express.Response, next: express.NextFunction) {
-      //render page
-      res.json("Welcome api for chat app");
-    }
-  }
-}
+router.get("/", function(req: express.Request, res: express.Response) {
+  res.json("index");
+});
 
-export = Route;
+module.exports = router;

@@ -3,7 +3,6 @@
 
 import * as bodyParser from "body-parser";
 import * as express from "express";
-import * as path from "path";
 
 import * as indexRoute from "./routes/index";
 
@@ -82,16 +81,25 @@ class Server {
     let router: express.Router;
     router = express.Router();
 
-    //create routes
-    var index: indexRoute.Index = new indexRoute.Index();
+    // //create routes
+    // var index: indexRoute.Index = new indexRoute.Index();
 
-    //home page
-    router.get("/", index.index.bind(index.index));
+    // //home page
+    // router.get("/", index.index);
 
     //use router middleware
-    this.app.use(router);
+    // this.app.use(router);
+
+    this.app.use(require("./routes"));
   }
 }
 
+// var config = require('../config/config');
+// var AWS = require("aws-sdk");
+// AWS.config.update(config.dynamodb);
+
+// module.exports.db = new AWS.DynamoDB.DocumentClient();
+
 var server = Server.bootstrap();
 export = server.app;
+
