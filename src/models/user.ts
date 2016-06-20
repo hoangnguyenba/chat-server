@@ -2,8 +2,8 @@
 "use strict";
 
 // import config = require('../config/config');
-import AWS = require('aws-sdk');
-// import * as AWS from "aws-sdk";
+// import AWS = require('aws-sdk');
+import * as AWS from "aws-sdk";
 
 AWS.config.update({
     "endpoint": "http://localhost:8000",
