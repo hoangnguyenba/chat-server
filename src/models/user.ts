@@ -2,20 +2,14 @@
 "use strict";
 
 // import config = require('../config/config');
-// import AWS = require('aws-sdk');
-import * as AWS from "aws-sdk";
-
-AWS.config.update({
-    "endpoint": "http://localhost:8000",
-    "region": "us-west-2"   
-});
+import { database } from "../database";
 
 // AWS.config.update({
 //     "endpoint": "http://localhost:8000",
-//     "region": "us-west-2"
+//     "region": "us-west-2"   
 // });
 
-var db = new AWS.DynamoDB.DocumentClient();
+// var db = new AWS.DynamoDB.DocumentClient();
 
 export class UserModel {
     TABLE_NAME = "User";
@@ -32,7 +26,7 @@ export class UserModel {
             params.AttributesToGet = params.AttributesToGet;
         }
 
-        db.get(params_dynamo, function(err, data_dynamo) {
+        database.get(params_dynamo, function(err, data_dynamo) {
             if(err) {
                 console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
                 return callback(err, null);
@@ -52,14 +46,12 @@ export class UserModel {
             ]
         };
 
-        db.scan(params, function(err, data_dynamo) {
+        database.scan(params, function(err, data_dynamo) {
             if(err) {
                 console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
                 return callback(err, null);
             }
             callback(null, data_dynamo);
         });
-
-
     };
 } 
