@@ -2,7 +2,7 @@ var config = require('./config/config');
 var AWS = require("aws-sdk");
 AWS.config.update(config.dynamodb);
 
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt-nodejs');
 var fs = require('fs');
 
 
@@ -21,7 +21,7 @@ allMessages.forEach(function(user) {
         }
     };
 
-    bcrypt.hash(user.password, 10, function(err, hash) {
+    bcrypt.hash(user.password, null, null, function(err, hash) {
 
         params.Item.password = hash;
 

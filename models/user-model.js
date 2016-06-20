@@ -28,7 +28,6 @@ UserModel.get = function(params, callback) {
 
 };
 
-
 UserModel.getAll = function(callback) {
     
     var params = {
@@ -44,10 +43,6 @@ UserModel.getAll = function(callback) {
             console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
             return callback(err, null);
         }
-        console.log("Query succeeded." + JSON.stringify(data_dynamo, null, 2));
-        data_dynamo.Items.forEach(function(item) {
-            console.log(" -", item.text);
-        });
         callback(null, data_dynamo);
     });
 
