@@ -3,9 +3,10 @@
 
 import { Model } from "./model";
 
-export class UserModel extends Model {
-    TABLE_NAME = "User";
-    KEY = "id";
+export class MessageModel extends Model {
+    TABLE_NAME = "Message";
+    KEY = "thread_id";
+    SORT = "created_at";
 
     constructor() {
         super();

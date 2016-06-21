@@ -42,7 +42,6 @@ MessageModel.getAll = function(thread_id, callback) {
         callback(null, data_dynamo);
     });
 
-
 };
 
 MessageModel.createMessageFromClientData = function (data) {

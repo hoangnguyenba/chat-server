@@ -6,6 +6,7 @@ import * as express from "express";
 
 var router = express.Router();
 
+router.use("/messages", require("./messages"));
 router.use("/users", require("./users"));
 
 router.get("/", function(req: express.Request, res: express.Response) {
