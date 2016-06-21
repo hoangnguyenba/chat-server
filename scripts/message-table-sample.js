@@ -1,14 +1,10 @@
-var config = require('./config/config');
-var AWS = require("aws-sdk");
-AWS.config.update(config.dynamodb);
-
 var fs = require('fs');
 
-var docClient = new AWS.DynamoDB.DocumentClient();
+var db = require('./dynamodb.js');
 
 console.log("Importing messages into DynamoDB. Please wait.");
 
-var allMessages = JSON.parse(fs.readFileSync('message-data.json', 'utf8'));
+var allMessages = JSON.parse(fs.readFileSync('./scripts/message-data.json', 'utf8'));
 allMessages.forEach(function(message) {
     var params = {
         TableName: "Message",
@@ -22,7 +18,7 @@ allMessages.forEach(function(message) {
 
     console.log(JSON.stringify(params));
 
-    docClient.put(params, function(err, data) {
+    db.docClient.put(params, function(err, data) {
        if (err) {
            console.error("Unable to add message", message.text, ". Error JSON:", JSON.stringify(err, null, 2));
        } else {
