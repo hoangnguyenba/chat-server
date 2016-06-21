@@ -4,6 +4,7 @@
 import * as express from "express";
 import { UserModel } from "../models/user";
 
+
 var router = express.Router();
 
 router.get("/:id", function(req: express.Request, res: express.Response) {
@@ -45,5 +46,6 @@ router.get("/", function(req: express.Request, res: express.Response) {
         return res.send(result);
     });
 });
+
 
 module.exports = router;

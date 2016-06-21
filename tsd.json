@@ -6,25 +6,40 @@
   "bundle": "typings/tsd.d.ts",
   "installed": {
     "express/express.d.ts": {
-      "commit": "e325b363f5ee9c72ebde49f1e783ae725f64b7e2"
+      "commit": "830e4aaac859e4f648efaa16712f1d6e378e6902"
     },
     "serve-static/serve-static.d.ts": {
-      "commit": "e325b363f5ee9c72ebde49f1e783ae725f64b7e2"
+      "commit": "830e4aaac859e4f648efaa16712f1d6e378e6902"
     },
     "express-serve-static-core/express-serve-static-core.d.ts": {
-      "commit": "e325b363f5ee9c72ebde49f1e783ae725f64b7e2"
+      "commit": "830e4aaac859e4f648efaa16712f1d6e378e6902"
     },
     "mime/mime.d.ts": {
-      "commit": "e325b363f5ee9c72ebde49f1e783ae725f64b7e2"
+      "commit": "830e4aaac859e4f648efaa16712f1d6e378e6902"
     },
     "node/node.d.ts": {
-      "commit": "e325b363f5ee9c72ebde49f1e783ae725f64b7e2"
+      "commit": "830e4aaac859e4f648efaa16712f1d6e378e6902"
     },
     "body-parser/body-parser.d.ts": {
       "commit": "e325b363f5ee9c72ebde49f1e783ae725f64b7e2"
     },
     "aws-sdk/aws-sdk.d.ts": {
       "commit": "e325b363f5ee9c72ebde49f1e783ae725f64b7e2"
+    },
+    "bcrypt-nodejs/bcrypt-nodejs.d.ts": {
+      "commit": "830e4aaac859e4f648efaa16712f1d6e378e6902"
+    },
+    "jsonwebtoken/jsonwebtoken.d.ts": {
+      "commit": "830e4aaac859e4f648efaa16712f1d6e378e6902"
+    },
+    "express-jwt/express-jwt.d.ts": {
+      "commit": "830e4aaac859e4f648efaa16712f1d6e378e6902"
+    },
+    "express-unless/express-unless.d.ts": {
+      "commit": "830e4aaac859e4f648efaa16712f1d6e378e6902"
+    },
+    "cors/cors.d.ts": {
+      "commit": "830e4aaac859e4f648efaa16712f1d6e378e6902"
     }
   }
 }

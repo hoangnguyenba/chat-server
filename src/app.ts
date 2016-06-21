@@ -3,6 +3,7 @@
 
 import * as bodyParser from "body-parser";
 import * as express from "express";
+import * as cors from "cors";
 
 import * as indexRoute from "./routes/index";
 
@@ -54,6 +55,8 @@ class Server {
 
     //mount logger
     //this.app.use(logger("dev"));
+
+    this.app.use(cors());
 
     //mount json form parser
     this.app.use(bodyParser.json());
