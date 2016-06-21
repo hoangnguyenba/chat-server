@@ -94,12 +94,6 @@ class Server {
   }
 }
 
-// var config = require('../config/config');
-// var AWS = require("aws-sdk");
-// AWS.config.update(config.dynamodb);
-
-// module.exports.db = new AWS.DynamoDB.DocumentClient();
-
 var server = Server.bootstrap();
 export = server.app;
 

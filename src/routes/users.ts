@@ -18,7 +18,7 @@ router.get("/:id", function(req: express.Request, res: express.Response) {
 
     var userModel = new UserModel();
 
-    userModel.get(params, function(error: any, result: any) {
+    userModel.find(params, function(error: any, result: any) {
         if (error) {
             return res.status(400).send(error);
         }

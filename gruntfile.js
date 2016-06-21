@@ -12,7 +12,7 @@ module.exports = function(grunt) {
           module: "commonjs",
           noLib: true,
           target: "es6",
-          sourceMap: false
+          sourceMap: true
         }
       }
     },
