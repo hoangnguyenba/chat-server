@@ -1,7 +1,7 @@
-/// <reference path="./_all.d.ts" />
+/// <reference path="../_all.d.ts" />
 "use strict";
 
-var config = require('../config/config');
+var config = require("./config");
 import * as AWS from "aws-sdk";
 
 AWS.config.update(config.database);

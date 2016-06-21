@@ -10,16 +10,16 @@ router.get("/:id", function(req: express.Request, res: express.Response) {
 
     var params = {
         id: req.params.id,
-        AttributesToGet: [ 
-            'id',
-            'name'
+        AttributesToGet: [
+            "id",
+            "name"
         ]
     };
 
     var userModel = new UserModel();
 
-    userModel.get(params,function(error, result) {
-        if(error) {
+    userModel.get(params, function(error: any, result: any) {
+        if (error) {
             return res.status(400).send(error);
         }
         return res.send(result);

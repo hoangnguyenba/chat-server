@@ -1,21 +1,13 @@
 /// <reference path="../_all.d.ts" />
 "use strict";
 
-// import config = require('../config/config');
-import { database } from "../database";
-
-// AWS.config.update({
-//     "endpoint": "http://localhost:8000",
-//     "region": "us-west-2"   
-// });
-
-// var db = new AWS.DynamoDB.DocumentClient();
+import { database } from "../config/database";
 
 export class UserModel {
     TABLE_NAME = "User";
 
     get(params: any, callback: Function) {
-        var params_dynamo = {
+        var paramsDynamo = {
             TableName: this.TABLE_NAME,
             Key: {
                 id: params.id
@@ -26,17 +18,17 @@ export class UserModel {
             params.AttributesToGet = params.AttributesToGet;
         }
 
-        database.get(params_dynamo, function(err, data_dynamo) {
-            if(err) {
+        database.get(paramsDynamo, function(err: any, dataDynamo: any) {
+            if (err) {
                 console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
                 return callback(err, null);
             }
-            callback(null, data_dynamo);
+            callback(null, dataDynamo);
         });
     };
 
 
-    getAll(callback) {
+    getAll(callback: Function) {
 
         var params = {
             TableName : this.TABLE_NAME,
@@ -46,12 +38,12 @@ export class UserModel {
             ]
         };
 
-        database.scan(params, function(err, data_dynamo) {
-            if(err) {
+        database.scan(params, function(err: any, dataDynamo: any) {
+            if (err) {
                 console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
                 return callback(err, null);
             }
-            callback(null, data_dynamo);
+            callback(null, dataDynamo);
         });
     };
 } 
