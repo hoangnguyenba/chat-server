@@ -3,11 +3,11 @@
 
 import * as express from "express";
 import { UserModel } from "../models/user";
-
+import { auth } from "../middlewares/auth";
 
 var router = express.Router();
 
-router.get("/:id", function(req: express.Request, res: express.Response) {
+router.get("/:id", auth, function(req: express.Request, res: express.Response) {
 
     var params = {
         id: req.params.id,
@@ -28,7 +28,7 @@ router.get("/:id", function(req: express.Request, res: express.Response) {
 });
 
 
-router.get("/", function(req: express.Request, res: express.Response) {
+router.get("/", auth, function(req: express.Request, res: express.Response) {
 
     var params = {
         AttributesToGet: [

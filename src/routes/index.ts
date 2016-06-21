@@ -4,7 +4,6 @@
 import * as express from "express";
 
 import { createToken } from "../middlewares/auth";
-import * as jwtCheck from "express-jwt";
 
 import { UserModel } from "../models/user";
 
