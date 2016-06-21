@@ -12,11 +12,12 @@ export class Model {
             TableName: this.TABLE_NAME,
             Key: {
                 id: params.id
-            }
+            },
+            AttributesToGet: []
         };
 
         if (typeof(params.AttributesToGet) !== "undefined") {
-            params.AttributesToGet = params.AttributesToGet;
+            paramsDynamo.AttributesToGet = params.AttributesToGet;
         }
 
         database.get(paramsDynamo, function(err: any, dataDynamo: any) {
@@ -31,11 +32,12 @@ export class Model {
     findAll(params: any, callback: Function) {
 
         var paramsDynamo = {
-            TableName : this.TABLE_NAME
+            TableName : this.TABLE_NAME,
+            AttributesToGet: []
         };
 
         if (typeof(params.AttributesToGet) !== "undefined") {
-            params.AttributesToGet = params.AttributesToGet;
+            paramsDynamo.AttributesToGet = params.AttributesToGet;
         }
 
         database.scan(paramsDynamo, function(err: any, dataDynamo: any) {
