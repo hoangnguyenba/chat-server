@@ -71,4 +71,30 @@ export class Model {
             callback(null, dataDynamo);
         });
     };
+
+    add(data: any, callback: Function) {
+        var params = {
+            TableName: this.TABLE_NAME,
+            Item: this.createMessageFromClientData(data)
+        };
+
+        database.put(params, function(err: any, dataDynamo: any) {
+            if (err) {
+                console.error("Unable to add message", data.text, ". Error JSON:", JSON.stringify(err, null, 2));
+                return callback(err, null);
+            }
+            console.log("PutItem succeeded:", JSON.stringify(data, null, 2));
+            callback(null, dataDynamo);
+        });
+    }
+
+    createMessageFromClientData(data: any) {
+        var item =  {
+                "thread_id":  data.thread.id,
+                "created_at":  new Date().getTime(),
+                "author"   :  data.author,
+                "text"   :  data.text
+            };
+        return item;
+    }
 }

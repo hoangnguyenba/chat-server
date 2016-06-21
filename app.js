@@ -45,6 +45,6 @@ io.on("connection", function(socket){
     });
 });
 
-server.listen(port, function(){
+server.listen(port, function() {
   console.log('listening on *:' + server.address().port);
 });

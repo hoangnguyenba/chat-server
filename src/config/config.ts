@@ -4,5 +4,6 @@ export var config = {
         "region": "us-west-2"
     },
     "jwt_secret": "this is suppeer secret",
-    "session_time": 3600
+    "session_time": 3600,
+    "port": 8080
 };

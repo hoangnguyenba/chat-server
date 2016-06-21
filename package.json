@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "grunt": "grunt --force",
-    "start": "node ./bin/www"
+    "start": "node ./des/app.js"
   },
   "author": "Hoang Nguyen",
   "license": "ISC",

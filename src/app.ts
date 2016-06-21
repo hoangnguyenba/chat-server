@@ -4,8 +4,13 @@
 import * as bodyParser from "body-parser";
 import * as express from "express";
 import * as cors from "cors";
+import * as io from "socket.io";
+import * as http from "http";
+
+import { config } from "./config/config";
 
 import * as indexRoute from "./routes/index";
+import { MessageModel } from "./models/message";
 
 /**
  * The server.
@@ -14,7 +19,9 @@ import * as indexRoute from "./routes/index";
  */
 class Server {
 
-  public app: express.Application;
+  public app;
+  public io: SocketIO.Server;
+  public http: http.Server;
 
   /**
    * Bootstrap the application.
@@ -36,12 +43,35 @@ class Server {
   constructor() {
     //create expressjs application
     this.app = express();
+    this.http = http.createServer(this.app);
+    this.io = io(this.http);
 
     //configure application
     this.config();
 
     //configure routes
     this.routes();
+
+    //start listen socket
+    this.io.on("connection", (socket: any) => {
+        console.log("a user connected");
+        socket.on("chat_message", (msg: any) => {
+
+            var messageModel = new MessageModel();
+            messageModel.add(msg, (error: any, result: any) => {
+                if (error) {
+                    console.log(JSON.stringify(error));
+                } else {
+                    this.io.emit("chat_message", messageModel.createMessageFromClientData(msg));
+                }
+            });
+        });
+    });
+
+
+    this.http.listen(config.port, () => {
+      console.log("listening on *:" + this.http.address().port);
+    });
   }
 
   /**
@@ -85,5 +115,5 @@ class Server {
 }
 
 var server = Server.bootstrap();
-export = server.app;
+// export = server.app;
 
