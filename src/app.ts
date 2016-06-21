@@ -80,19 +80,6 @@ class Server {
    * @return void
    */
   private routes() {
-    //get router
-    let router: express.Router;
-    router = express.Router();
-
-    // //create routes
-    // var index: indexRoute.Index = new indexRoute.Index();
-
-    // //home page
-    // router.get("/", index.index);
-
-    //use router middleware
-    // this.app.use(router);
-
     this.app.use(require("./routes"));
   }
 }

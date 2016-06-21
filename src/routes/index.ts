@@ -32,28 +32,43 @@ router.post("/login", function(req: express.Request, res: express.Response) {
     };
 
     var userModel = new UserModel();
-
-    userModel.find(params, function(error: any, result: any) {
-        if (error) {
-            return res.status(400).send(error);
-        }
-        var user: any = result.Item;
-
-        // Check password
-        bcrypt.compare(password, user.password, function(err: any, result: any) {
-            if (result) {
-                res.json({
-                    status: true,
-                    id_token: createToken(user),
-                    user: user
-                });
-            } else {
-                res.json({
-                    status: false
-                });
-            }
-        });
+    userModel.check({
+      username: id,
+      password: password
+    }, (err, user) => {
+      if(err) {
+        res.json(err);
+      } else {
+        res.json({
+              status: true,
+              id_token: createToken(user),
+              user: user
+          });
+      }
     });
+
+    // userModel.find(params, function(error: any, result: any) {
+        
+    //     if (error) {
+    //         return res.status(400).send(error);
+    //     }
+    //     var user: any = result.Item;
+
+    //     // Check password
+    //     bcrypt.compare(password, user.password, function(err: any, result: any) {
+    //         if (result) {
+    //             res.json({
+    //                 status: true,
+    //                 id_token: createToken(user),
+    //                 user: user
+    //             });
+    //         } else {
+    //             res.json({
+    //                 status: false
+    //             });
+    //         }
+    //     });
+    // });
 
 
 });
