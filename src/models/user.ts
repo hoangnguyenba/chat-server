@@ -22,7 +22,7 @@ export class UserModel extends Model {
         };
 
         this.find(paramsDynamo, function(error: any, result: any) {
-            if (Object.keys(result).length == 0) {
+            if (Object.keys(result).length === 0) {
                 return callback("Wrong username", null);
             }
             var user: any = result.Item;

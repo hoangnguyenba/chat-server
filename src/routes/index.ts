@@ -3,10 +3,8 @@
 
 import * as express from "express";
 
-import * as bcrypt from "bcrypt-nodejs";
-import * as jwt from "jsonwebtoken";
+import { createToken } from "../middlewares/auth";
 import * as jwtCheck from "express-jwt";
-import { config } from "../config/config";
 
 import { UserModel } from "../models/user";
 
@@ -36,7 +34,7 @@ router.post("/login", function(req: express.Request, res: express.Response) {
       username: id,
       password: password
     }, (err, user) => {
-      if(err) {
+      if (err) {
         res.json(err);
       } else {
         res.json({
@@ -46,36 +44,6 @@ router.post("/login", function(req: express.Request, res: express.Response) {
           });
       }
     });
-
-    // userModel.find(params, function(error: any, result: any) {
-        
-    //     if (error) {
-    //         return res.status(400).send(error);
-    //     }
-    //     var user: any = result.Item;
-
-    //     // Check password
-    //     bcrypt.compare(password, user.password, function(err: any, result: any) {
-    //         if (result) {
-    //             res.json({
-    //                 status: true,
-    //                 id_token: createToken(user),
-    //                 user: user
-    //             });
-    //         } else {
-    //             res.json({
-    //                 status: false
-    //             });
-    //         }
-    //     });
-    // });
-
-
 });
-
-function createToken(user: any) {
-  delete user.password;
-  return jwt.sign(user, config.jwt_secret, { expiresIn: config.session_time });
-}
 
 module.exports = router;
