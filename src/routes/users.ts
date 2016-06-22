@@ -3,7 +3,7 @@
 
 import * as express from "express";
 import { UserModel } from "../models/user";
-import { auth } from "../middlewares/auth";
+import { auth, getToken } from "../middlewares/auth";
 
 var router = express.Router();
 

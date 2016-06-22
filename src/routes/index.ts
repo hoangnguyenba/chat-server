@@ -11,6 +11,7 @@ var router = express.Router();
 
 router.use("/messages", require("./messages"));
 router.use("/users", require("./users"));
+router.use("/threads", require("./threads"));
 
 router.get("/", function(req: express.Request, res: express.Response) {
   res.json("index");
