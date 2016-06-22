@@ -75,7 +75,7 @@ class Server {
                 if (error) {
                     console.log(JSON.stringify(error));
                 } else {
-                    this.io.emit("chat_message", messageModel.createMessageFromClientData(msg));
+                    this.io.emit(msg.thread.id, messageModel.createMessageFromClientData(msg));
                 }
             });
         });
