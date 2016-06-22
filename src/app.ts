@@ -58,15 +58,11 @@ class Server {
 
         socket.on("mark_thread_as_read", (thread: any, user: any) => {
 
-            console.log("############mark_thread_as_read##############");
-            console.log(thread);
-            console.log(user);
             var messageModel = new MessageModel();
             messageModel.markThreadAsRead(thread, user, (error: any, result: any) => {
                 if (error) {
                     console.log(JSON.stringify(error));
                 } else {
-                    console.log("read ..................");
                     console.log(result);
                 }
             });

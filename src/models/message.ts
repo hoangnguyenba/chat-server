@@ -35,7 +35,6 @@ export class MessageModel extends Model {
                 // With every message
                 data.Items.forEach(item => {
                     // save this message is read by this user
-
                     var isRead = [];
                     if (!("is_read" in item)) {
                         isRead.push(user.id);
@@ -47,7 +46,6 @@ export class MessageModel extends Model {
                     var params2 = {
                         TableName: "Message",
                         Key: { // The primary key of the item (a map of attribute name to AttributeValue)
-
                             thread_id: item.thread_id,
                             created_at: item.created_at
                         },
