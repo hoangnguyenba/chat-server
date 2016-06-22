@@ -1,22 +1,32 @@
 [
     {
-        "id" : "user1",
-        "password": "user1pass",
+        "id" : "ronaldo",
+        "password": "ronaldo",
         "name"    : "Ronaldo"
     },
     {
-        "id" : "user2",
-        "password": "user2pass",
+        "id" : "ramos",
+        "password": "ramos",
+        "name"    : "Ramos"
+    },
+    {
+        "id" : "messi",
+        "password": "messi",
         "name"    : "Messi"
     },
     {
-        "id" : "user3",
-        "password": "user3pass",
+        "id" : "Pique",
+        "password": "pique",
+        "name"    : "pique"
+    },
+    {
+        "id" : "rooney",
+        "password": "rooney",
         "name"    : "Rooney"
     },
     {
-        "id" : "user4",
-        "password": "user4pass",
+        "id" : "mata",
+        "password": "mata",
         "name"    : "Mata"
     }
 ]

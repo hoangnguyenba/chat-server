@@ -2,7 +2,7 @@ process.argv.forEach(function (val, index, array) {
   console.log(index + ': ' + val);
 });
 
-var ARR_TABLE = ["Message", "User"];
+var ARR_TABLE = ["Message", "User", "Thread"];
 
 var type = "reset"; // create, delete, sample, reset
 var table = "all"; // all, Message, User
@@ -37,8 +37,8 @@ tables.forEach((t) => {
         require( "./" + t.toLowerCase() + '-table-delete.js');
         console.log('####Create####');
         require( "./" + t.toLowerCase() + '-table-create.js');
-        console.log('####Add sample data####');
-        require( "./" + t.toLowerCase() + '-table-sample.js');
+        // console.log('####Add sample data####');
+        // require( "./" + t.toLowerCase() + '-table-sample.js');
     }
     else if(type == "create")
     {

@@ -1,41 +1,41 @@
 [
     {
-        "thread_id" : "user1:user2",
+        "thread_id" : "ronado:messi",
         "text"      : "Hello",
         "author"    : {
-                "id"    : "user1",
+                "id"    : "ronaldo",
                 "name"  : "Ronaldo"
             }
     },
     {
-        "thread_id" : "user1:user2",
+        "thread_id" : "ronaldo:messi",
         "text"      : "Hi there",
         "author"    : {
-                "id"    : "user2",
+                "id"    : "messi",
                 "name"  : "Messi"
             }
     },
     {
-        "thread_id" : "user1:user3",
+        "thread_id" : "ronaldo:rooney",
         "text"      : "Mai anh ve MU da' nha",
         "author"    : {
-                "id"    : "user1",
+                "id"    : "ronaldo",
                 "name"  : "Ronaldo"
             }
     },
     {
-        "thread_id" : "user3:user4",
+        "thread_id" : "rooney:mata",
         "text"      : "Hom nay the nao ku",
         "author"    : {
-                "id"    : "user3",
+                "id"    : "rooney",
                 "name"  : "Rooney"
             }
     },
     {
-        "thread_id" : "user3:user4",
+        "thread_id" : "rooney:mata",
         "text"      : "Chien thoi",
         "author"    : {
-                "id"    : "user4",
+                "id"    : "mata",
                 "name"  : "Mata"
             }
     }
