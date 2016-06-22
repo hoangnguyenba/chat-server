@@ -93,7 +93,8 @@ export class Model {
                 "thread_id":  data.thread.id,
                 "created_at":  new Date().getTime(),
                 "author"   :  data.author,
-                "text"   :  data.text
+                "text"   :  data.text,
+                "is_read" : [data.author.id]
             };
         return item;
     }

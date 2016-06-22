@@ -26,7 +26,7 @@ export class MessageModel extends Model {
             }
         };
 
-        database.query(params, function(err: any, data: any) {
+        database.query(params, (err: any, data: any) => {
             if (err) {
                 callback(err, null);
             } else {
@@ -35,11 +35,12 @@ export class MessageModel extends Model {
                 // With every message
                 data.Items.forEach(item => {
                     // save this message is read by this user
+
                     var isRead = [];
                     if (!("is_read" in item)) {
                         isRead.push(user.id);
                     } else {
-                        isRead = item.isRead;
+                        isRead = item.is_read;
                         isRead.push(user.id);
                     }
 
