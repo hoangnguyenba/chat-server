@@ -72,7 +72,7 @@ export class Model {
         });
     };
 
-    add(data: any, callback: Function) {
+    save(data: any, callback: Function) {
         var params = {
             TableName: this.TABLE_NAME,
             Item: this.createMessageFromClientData(data)

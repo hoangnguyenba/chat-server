@@ -55,10 +55,27 @@ class Server {
     //start listen socket
     this.io.on("connection", (socket: any) => {
         console.log("a user connected");
+
+        socket.on("mark_thread_as_read", (thread: any, user: any) => {
+
+            console.log("############mark_thread_as_read##############");
+            console.log(thread);
+            console.log(user);
+            var messageModel = new MessageModel();
+            messageModel.markThreadAsRead(thread, user, (error: any, result: any) => {
+                if (error) {
+                    console.log(JSON.stringify(error));
+                } else {
+                    console.log("read ..................");
+                    console.log(result);
+                }
+            });
+        });
+
         socket.on("chat_message", (msg: any) => {
 
             var messageModel = new MessageModel();
-            messageModel.add(msg, (error: any, result: any) => {
+            messageModel.save(msg, (error: any, result: any) => {
                 if (error) {
                     console.log(JSON.stringify(error));
                 } else {
