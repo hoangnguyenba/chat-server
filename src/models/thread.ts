@@ -15,31 +15,43 @@ export class ThreadModel extends Model {
 
     getThreadsOfUser(params: any, callback: Function) {
 
-
-        var paramsDynamo = {
-            RequestItems: {
-                "Thread": {
-                    Keys: [
-                        {
-                            "thread_id": "manchester"
-                        },
-                        {
-                            "thread_id": "real"
-                        }
-                    ]
-                }
+        // Get this user 1st
+        var paramsDynamo1 = {
+            TableName: "User",
+            Key: {
+                "id": params.id
             }
         };
-
-
-        database.batchGet(paramsDynamo, function(err: any, data: any) {
+        database.get(paramsDynamo1, (err: any, data: any) => {
             if (err) {
-                console.log("err");
-                console.log(err);
+                callback(err, null);
             } else {
-                console.log("data");
+                var keys = [];
+                console.log(data);
+                data.Item.threads.forEach(x => {
+                    keys.push({
+                        "thread_id": x
+                    });
+                });
+
+                var paramsDynamo2 = {
+                    RequestItems: {
+                        "Thread": {
+                            Keys: keys
+                        }
+                    }
+                };
+
+
+                database.batchGet(paramsDynamo2, (err: any, data: any) => {
+                    if (err) {
+                        callback(err, null);
+                    } else {
+                        callback(null, data);
+                    } // successful response
+                });
+
             } // successful response
-            callback(err, data);
         });
     }
 }

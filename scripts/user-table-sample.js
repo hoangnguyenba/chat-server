@@ -11,7 +11,8 @@ allMessages.forEach(function(user) {
         TableName: "User",
         Item: {
             "id":  user.id,
-            "name": user.name
+            "name": user.name,
+            "threads": user.threads
         }
     };
 

@@ -14,11 +14,7 @@ router.get("/", auth, function(req: express.Request, res: express.Response) {
     var dtoken = jwt.decode(token, { complete: true }) || {};
 
     var params = {
-        AttributesToGet: [
-            "thread_id",
-            "name"
-        ],
-        id: dtoken.payloads.id
+        id: dtoken.payload.id
     };
 
     var threadModel = new ThreadModel();
