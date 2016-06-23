@@ -13,8 +13,8 @@ export function createToken(user: any) {
 export var auth = jwtCheck(config.jwt);
 
 export function getToken(req: any) {
-  var parts = req.headers.authorization.split(' ');
-  if (parts.length == 2) {
+  var parts = req.headers.authorization.split(" ");
+  if (parts.length === 2) {
     var scheme = parts[0];
     var credentials = parts[1];
 

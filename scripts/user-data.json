@@ -2,31 +2,37 @@
     {
         "id" : "ronaldo",
         "password": "ronaldo",
-        "name"    : "Ronaldo"
+        "name"    : "Ronaldo",
+        "threads"  : ["manchester", "real"]
     },
     {
         "id" : "ramos",
         "password": "ramos",
-        "name"    : "Ramos"
+        "name"    : "Ramos",
+        "threads"  : ["real"]
     },
     {
         "id" : "messi",
         "password": "messi",
-        "name"    : "Messi"
+        "name"    : "Messi",
+        "threads"  : ["barcelona"]
     },
     {
-        "id" : "Pique",
+        "id" : "pique",
         "password": "pique",
-        "name"    : "pique"
+        "name"    : "Pique",
+        "threads"  : ["manchester", "barcelona"]
     },
     {
         "id" : "rooney",
         "password": "rooney",
-        "name"    : "Rooney"
+        "name"    : "Rooney",
+        "threads"  : ["manchester"]
     },
     {
         "id" : "mata",
         "password": "mata",
-        "name"    : "Mata"
+        "name"    : "Mata",
+        "threads"  : ["manchester"]
     }
 ]

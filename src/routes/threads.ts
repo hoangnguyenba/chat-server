@@ -9,7 +9,7 @@ import * as jwt from "jsonwebtoken";
 var router = express.Router();
 
 router.get("/", auth, function(req: express.Request, res: express.Response) {
-    
+
     var token = getToken(req);
     var dtoken = jwt.decode(token, { complete: true }) || {};
 
@@ -23,7 +23,7 @@ router.get("/", auth, function(req: express.Request, res: express.Response) {
 
     var threadModel = new ThreadModel();
 
-    threadModel.getThreadOfUser(params, function(error: any, result: any) {
+    threadModel.getThreadsOfUser(params, function(error: any, result: any) {
         if (error) {
             return res.status(400).send(error);
         }

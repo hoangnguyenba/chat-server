@@ -13,52 +13,33 @@ export class ThreadModel extends Model {
         super();
     }
 
-    getThreadOfUser(params: any, callback: Function) {
+    getThreadsOfUser(params: any, callback: Function) {
 
 
         var paramsDynamo = {
-                    TableName: "Thread",
-                    FilterExpression: "contains(#name, :val)", // a string representing a constraint on the attribute
-                    ExpressionAttributeNames: { // a map of substitutions for attribute names with special characters
-                        '#name': 'users'
-                    },
-                    ExpressionAttributeValues: { 
-                        ":val": params.id
-                    }
-                };
-        database.scan(paramsDynamo, function(err, data) {
+            RequestItems: {
+                "Thread": {
+                    Keys: [
+                        {
+                            "thread_id": "manchester"
+                        },
+                        {
+                            "thread_id": "real"
+                        }
+                    ]
+                }
+            }
+        };
+
+
+        database.batchGet(paramsDynamo, function(err: any, data: any) {
             if (err) {
-                console.log('err');
+                console.log("err");
                 console.log(err);
-            } // an error occurred
-            else {
-                console.log('data');
+            } else {
+                console.log("data");
             } // successful response
             callback(err, data);
         });
-
-
-        // callback(
-        //     [
-        //         {
-        //             "thread_id" : "manchester",
-        //             "name"      : "Manchester United",
-        //             "author"    : {
-        //                 "id"    : "rooney",
-        //                 "name"  : "Rooney"
-        //             },
-        //             "users": ["rooney", "mata", "ronaldo", "pique"]
-        //         },
-        //         {
-        //             "thread_id" : "real",
-        //             "name"      : "Real Madrid",
-        //             "author"    : {
-        //                 "id"    : "ronaldo",
-        //                 "name"  : "Ronaldo"
-        //             },
-        //             "users": ["ronaldo", "ramos"]
-        //         }
-        //     ]
-        // );
     }
 }
