@@ -7,5 +7,5 @@ export var config = {
         secret: "this is suppeer secret"
     },
     "session_time": 3600,
-    "port": 8080
+    "port": 3100
 };

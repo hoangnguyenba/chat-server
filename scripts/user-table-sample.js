@@ -12,6 +12,7 @@ allMessages.forEach(function(user) {
         Item: {
             "id":  user.id,
             "name": user.name,
+            "logo": user.logo,
             "threads": user.threads
         }
     };
@@ -31,7 +32,4 @@ allMessages.forEach(function(user) {
             }
         });
     });
-
-
-    
 });
