@@ -1,10 +1,13 @@
+var db = require('./dynamodb.js');
+
+
 process.argv.forEach(function (val, index, array) {
   console.log(index + ': ' + val);
 });
 
-var ARR_TABLE = ["Message", "User", "Thread"];
+var ARR_TABLE = ["message", "user", "thread"];
 
-var type = "reset"; // create, delete, sample, reset
+var type = "init"; // create, delete, sample, reset, init
 var table = "all"; // all, Message, User
 
 if(typeof process.argv[3] !== "undefined")
@@ -31,31 +34,83 @@ else
 
 tables.forEach((t) => {
 
-    if(type == "reset")
+    if(type == "init")
     {
-        console.log('####Delete####');
-        require( "./" + t.toLowerCase() + '-table-delete.js');
-        console.log('####Create####');
-        require( "./" + t.toLowerCase() + '-table-create.js');
-        // console.log('####Add sample data####');
-        // require( "./" + t.toLowerCase() + '-table-sample.js');
+        // create table
+        createTable(t, function (err, data) {
+            if(err == null)
+            {
+                sampleTable(t, function (err, data) {
+                });
+            }
+        });
+    }
+    else if(type == "reset")
+    {
+        // create table
+        deleteTable(t, function (err, data) {
+            // create table
+            createTable(t, function (err, data) {
+                sampleTable(t, function (err, data) {
+                });
+            });
+        });
     }
     else if(type == "create")
     {
-        console.log('####Create####');
-        require( "./" + t.toLowerCase() + '-table-create.js');
+        createTable(t, function (err, data) {
+        });
     }
     else if(type == "delete")
     {
-        console.log('####Delete####');
-        require( "./" + t.toLowerCase() + '-table-delete.js');
+        deleteTable(t, function (err, data) {
+        });
     }
     else if(type == "sample")
     {
-        console.log('####Add sample data####');
-        require( "./" + t.toLowerCase() + '-table-sample.js');
+        sampleTable(t, function (err, data) {
+        });
     }
     
 });
+
+function deleteTable(table_name, callback) {
+
+    var params = {
+        TableName : capitalizeFirstLetter(table_name)
+    };
+
+    db.dynamoDB.deleteTable(params, function(err, data) {
+        if (err) {
+            console.error("Unable to delete table. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("Deleted table. Table description JSON:", JSON.stringify(data, null, 2));
+        }
+        callback(err, data);
+    });
+}
+
+function createTable(table_name, callback) {
+    
+    var params = require( "./" + table_name + '-table-create.js');
+
+    db.dynamoDB.createTable(params, function(err, data) {
+        if (err) {
+            console.error("Unable to create table. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("Created table. Table description JSON:", JSON.stringify(data, null, 2));
+        }
+        callback(err, data);
+    });
+}
+
+function sampleTable(table_name, callback) {
+    require( "./" + table_name + '-table-sample.js')(callback);
+}
+
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 console.log('####end####');
