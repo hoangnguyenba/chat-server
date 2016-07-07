@@ -25,6 +25,7 @@ npm install
 ```
 
 The `npm run grunt` command : compile source from typescript into es6
+
 The `npm start` command : start your server
 
 ```bash
