@@ -24,12 +24,13 @@ Install the npm packages described in the `package.json` and verify that it work
 npm install
 ```
 
-The `npm run grunt` command : compile source from typescript into es6
-
-The `npm start` command : start your server
-
+Compile source from typescript into es6
 ```bash
 npm run grunt
+```
+Start your server
+
+```bash
 npm start
 ```
 
