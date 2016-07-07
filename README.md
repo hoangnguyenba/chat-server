@@ -16,7 +16,7 @@ npm run db all init
 
 to create table and add sample data
 
-## Install npm packages
+## Install npm packages and start your server
 
 Install the npm packages described in the `package.json` and verify that it works:
 
