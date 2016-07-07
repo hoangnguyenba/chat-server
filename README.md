@@ -18,8 +18,6 @@ to create table and add sample data
 
 ## Install npm packages
 
-> See npm and nvm version notes above
-
 Install the npm packages described in the `package.json` and verify that it works:
 
 ```bash
@@ -43,5 +41,6 @@ We've captured many of the most useful commands in npm scripts defined in the `p
 * `npm run db [table] [command]` - script for database ( command: init, reset, delete, create, sample )
 
 >init = create -> sample
+
 >reset = delete -> create -> sample
 
