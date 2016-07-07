@@ -24,7 +24,7 @@ Install the npm packages described in the `package.json` and verify that it work
 npm install
 ```
 
-Compile source from typescript into es6
+Compile source from typescript to es6
 ```bash
 npm run grunt
 ```
