@@ -40,6 +40,10 @@ We've captured many of the most useful commands in npm scripts defined in the `p
 * `npm run grunt` - compile source from typescript into es6
 * `npm run db [table] [command]` - script for database ( command: init, reset, delete, create, sample )
 
+>table: thread, message, user ( default: all )
+
+>command: init, reset, delete, create, sample ( default: init )
+
 >init = create -> sample
 
 >reset = delete -> create -> sample
