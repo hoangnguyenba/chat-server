@@ -18,7 +18,7 @@
       "commit": "830e4aaac859e4f648efaa16712f1d6e378e6902"
     },
     "node/node.d.ts": {
-      "commit": "830e4aaac859e4f648efaa16712f1d6e378e6902"
+      "commit": "5979f9f7472d3ab58abd10059aea91531708b75c"
     },
     "body-parser/body-parser.d.ts": {
       "commit": "e325b363f5ee9c72ebde49f1e783ae725f64b7e2"
@@ -43,6 +43,18 @@
     },
     "socket.io/socket.io.d.ts": {
       "commit": "830e4aaac859e4f648efaa16712f1d6e378e6902"
+    },
+    "shortid/shortid.d.ts": {
+      "commit": "5b816099c3349c2e4d192ab1e37a89b7b0db8119"
+    },
+    "node-uuid/node-uuid.d.ts": {
+      "commit": "5979f9f7472d3ab58abd10059aea91531708b75c"
+    },
+    "node-uuid/node-uuid-base.d.ts": {
+      "commit": "5979f9f7472d3ab58abd10059aea91531708b75c"
+    },
+    "node-uuid/node-uuid-cjs.d.ts": {
+      "commit": "5979f9f7472d3ab58abd10059aea91531708b75c"
     }
   }
 }

@@ -5,7 +5,7 @@ process.argv.forEach(function (val, index, array) {
   console.log(index + ': ' + val);
 });
 
-var ARR_TABLE = ["message", "user", "thread"];
+var ARR_TABLE = ["message", "user", "thread", "manager"];
 
 var type = "init"; // create, delete, sample, reset, init
 var table = "all"; // all, Message, User
@@ -105,7 +105,17 @@ function createTable(table_name, callback) {
 }
 
 function sampleTable(table_name, callback) {
-    require( "./" + table_name + '-table-sample.js')(callback);
+    var fs = require('fs');
+    fs.exists( __dirname + '/' + table_name + '-table-sample.js', function(exists) {
+        if (exists) {
+            console.log('Table ' + table_name + ' has data sample!!!');
+            // Do something
+            require( "./" + table_name + '-table-sample.js')(callback);
+        } else {
+            // It isn't accessible
+            console.log('Table ' + table_name + ' doesn\'t have data sample!!!');
+        }
+    });
 }
 
 

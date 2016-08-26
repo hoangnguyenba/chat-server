@@ -62,6 +62,18 @@ export class Model {
         if (typeof(params.AttributesToGet) !== "undefined") {
             paramsDynamo.AttributesToGet = params.AttributesToGet;
         }
+        if (typeof(params.FilterExpression) !== "undefined") {
+            paramsDynamo.FilterExpression = params.FilterExpression;
+        }
+        if (typeof(params.ExpressionAttributeValues) !== "undefined") {
+            paramsDynamo.ExpressionAttributeValues = params.ExpressionAttributeValues;
+        }
+        if (typeof(params.ProjectionExpression) !== "undefined") {
+            paramsDynamo.ProjectionExpression = params.ProjectionExpression;
+        }
+        if (typeof(params.ExpressionAttributeNames) !== "undefined") {
+            paramsDynamo.ExpressionAttributeNames = params.ExpressionAttributeNames;
+        }
 
         database.scan(paramsDynamo, function(err: any, dataDynamo: any) {
             if (err) {
@@ -75,7 +87,7 @@ export class Model {
     save(data: any, callback: Function) {
         var params = {
             TableName: this.TABLE_NAME,
-            Item: this.createMessageFromClientData(data)
+            Item: data
         };
 
         database.put(params, function(err: any, dataDynamo: any) {
@@ -86,16 +98,5 @@ export class Model {
             console.log("PutItem succeeded:", JSON.stringify(data, null, 2));
             callback(null, dataDynamo);
         });
-    }
-
-    createMessageFromClientData(data: any) {
-        var item =  {
-                "thread_id":  data.thread.id,
-                "created_at":  new Date().getTime(),
-                "author"   :  data.author,
-                "text"   :  data.text,
-                "is_read" : [data.author.id]
-            };
-        return item;
     }
 }

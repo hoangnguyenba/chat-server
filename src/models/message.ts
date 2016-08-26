@@ -2,10 +2,18 @@
 "use strict";
 
 import { Model } from "./model";
+import { ThreadModel } from "./thread";
+import { UserModel } from "./user";
 
 import { database } from "../config/database";
 
 export class MessageModel extends Model {
+
+    static MESSAGE_TYPE_TEXT = 0;
+    static MESSAGE_TYPE_CHANGE_STATUS = 1;
+    static MESSAGE_TYPE_CHANGE_THREAD_STATUS = 2;
+    static MESSAGE_TYPE_MARK_THREAD_AS_READ = 3;
+
     TABLE_NAME = "Message";
     KEY = "thread_id";
     SORT = "created_at";
@@ -15,14 +23,19 @@ export class MessageModel extends Model {
     }
 
     markThreadAsRead(thread: any, user: any, callback: Function) {
+        // manager mark as read
+        var userid = user.id;
+        if (thread.type === ThreadModel.THREAD_TYPE_SERVE && user.type === 1) {
+            userid = "admin";
+        }
         // get all messages that have not been read by this user
         var params = {
-            TableName: "Message",
+            TableName: this.TABLE_NAME,
             KeyConditionExpression: "thread_id = :value", // a string representing a constraint on the attribute
             FilterExpression: "not contains(is_read, :val)", // a string representing a constraint on the attribute
             ExpressionAttributeValues: { // a map of substitutions for all attribute values
             ":value": thread.id,
-            ":val": user.id
+            ":val": userid
             }
         };
 
@@ -30,22 +43,19 @@ export class MessageModel extends Model {
             if (err) {
                 callback(err, null);
             } else {
-                console.log(data);
-
                 // With every message
                 data.Items.forEach(item => {
                     // save this message is read by this user
-
                     var isRead = [];
                     if (!("is_read" in item)) {
-                        isRead.push(user.id);
+                        isRead.push(userid);
                     } else {
                         isRead = item.is_read;
-                        isRead.push(user.id);
+                        isRead.push(userid);
                     }
 
                     var params2 = {
-                        TableName: "Message",
+                        TableName: this.TABLE_NAME,
                         Key: { // The primary key of the item (a map of attribute name to AttributeValue)
                             thread_id: item.thread_id,
                             created_at: item.created_at
@@ -67,5 +77,22 @@ export class MessageModel extends Model {
 
             } // successful response
         });
+    }
+
+    createMessageFromClientData(data: any) {
+
+        var userid = data.author.id;
+        if (data.thread.type === ThreadModel.THREAD_TYPE_SERVE && data.author.type === 1) {
+            userid = "admin";
+        }
+
+        var item =  {
+                "thread_id":  data.thread.id,
+                "created_at":  new Date().getTime(),
+                "author"   :  data.author,
+                "text"   :  data.text,
+                "is_read" : [userid]
+            };
+        return item;
     }
 }

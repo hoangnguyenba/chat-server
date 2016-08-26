@@ -1,29 +1,11 @@
 [
     {
-        "thread_id" : "manchester",
-        "name"      : "Manchester United",
+        "thread_id" : "general",
+        "name"      : "General",
         "author"    : {
-            "id"    : "rooney",
-            "name"  : "Rooney"
+            "id"    : "kachidoki",
+            "name"  : "Kachidoki"
         },
-        "users": ["rooney", "mata", "ronaldo", "pique"]
-    },
-    {
-        "thread_id" : "barca",
-        "name"      : "Barcelona FC",
-        "author"    : {
-            "id"    : "messi",
-            "name"  : "Messi"
-        },
-        "users": ["messi", "pique"]
-    },
-    {
-        "thread_id" : "real",
-        "name"      : "Real Madrid",
-        "author"    : {
-            "id"    : "ronaldo",
-            "name"  : "Ronaldo"
-        },
-        "users": ["ronaldo", "ramos"]
+        "users": ["kachidoki", "kachidoki2", "kachidoki3"]
     }
 ]

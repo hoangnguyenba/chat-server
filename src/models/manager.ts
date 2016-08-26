@@ -6,14 +6,14 @@ import { Model } from "./model";
 import * as bcrypt from "bcrypt-nodejs";
 import { database } from "../config/database";
 
-export class UserModel extends Model {
-    TABLE_NAME = "User";
+export class ManagerModel extends Model {
+    TABLE_NAME = "Manager";
     KEY = "id";
 
-    static USER_STATUS_OFFLINE = 0;
-    static USER_STATUS_ONLINE = 1;
-    static USER_STATUS_AWAY = 2;
-    static USER_STATUS_BUSY = 3;
+    static MANAGER_STATUS_OFFLINE = 0;
+    static MANAGER_STATUS_ONLINE = 1;
+    static MANAGER_STATUS_AWAY = 2;
+    static MANAGER_STATUS_BUSY = 3;
 
     constructor() {
         super();
@@ -47,7 +47,7 @@ export class UserModel extends Model {
     setOptions(params: any, callback: Function): void {
 
         var paramsDynamo = {
-            TableName: "User",
+            TableName: this.TABLE_NAME,
             Key: {
                 "id": params.id
             },
@@ -70,8 +70,8 @@ export class UserModel extends Model {
 
     setStatus(params: any, callback: Function): void {
 
-        var paramsDynamo = {
-            TableName: "User",
+        var paramsDynamo: any = {
+            TableName: this.TABLE_NAME,
             Key: {
                 "id": params.id
             },
@@ -81,7 +81,8 @@ export class UserModel extends Model {
             },
             ExpressionAttributeValues: {
                 ":o": params.status
-            }
+            },
+            ReturnValues: "ALL_NEW"
         };
 
         if (typeof(params.socket_id) !== "undefined") {
@@ -100,7 +101,7 @@ export class UserModel extends Model {
 
     search(params: any, callback: Function) {
         var paramsDynamo = {
-            TableName: "User",
+            TableName: this.TABLE_NAME,
             FilterExpression: "contains(#name, :value)",
             ExpressionAttributeValues: {
                 ":value": params.key
@@ -139,71 +140,16 @@ export class UserModel extends Model {
             UpdateExpression: "SET socket_id = :ski",
             ExpressionAttributeValues: {
                 ":ski": data.socket_id
-            },
-            ConditionExpression: "attribute_exists(id)"
+            }
         };
 
         if (typeof(data.status) !== "undefined") {
             params.UpdateExpression = params.UpdateExpression + ", #status = :s";
             params.ExpressionAttributeValues[":s"] = data.status;
             params.ExpressionAttributeNames = {
-                "#status": "status"
+                "#status": "attribute name"
             };
         }
-
-        database.update(params, function(err: any, dataDynamo: any) {
-            callback(err, dataDynamo);
-        });
-    }
-
-    updateLastMessage(data: any, callback: Function) {
-
-        var params: any = {
-            TableName: this.TABLE_NAME,
-            Key: {
-                id: data.id
-            },
-            UpdateExpression: "SET last_message = :msg, last_message_time = :msg_time",
-            ExpressionAttributeValues: {
-                ":msg": data.last_message,
-                ":msg_time": data.last_message_time
-            }
-        };
-
-        database.update(params, function(err: any, dataDynamo: any) {
-            callback(err, dataDynamo);
-        });
-    }
-
-    getListUserOnline(callback: Function) {
-        var paramsDynamo = {
-            TableName: this.TABLE_NAME,
-            FilterExpression: "#status = :s",
-            ExpressionAttributeValues: {
-                ":s": UserModel.USER_STATUS_ONLINE
-            },
-            ExpressionAttributeNames : {
-                "#status": "status"
-            }
-        };
-
-        database.scan(paramsDynamo, function(err: any, data: any) {
-            callback(err, data);
-        });
-    }
-
-    updateServeStatus(data: any, callback: Function) {
-
-        var params: any = {
-            TableName: this.TABLE_NAME,
-            Key: {
-                id: data.id
-            },
-            UpdateExpression: "SET serve_status = :serve_status",
-            ExpressionAttributeValues: {
-                ":serve_status": data.serve_status
-            }
-        };
 
         database.update(params, function(err: any, dataDynamo: any) {
             callback(err, dataDynamo);

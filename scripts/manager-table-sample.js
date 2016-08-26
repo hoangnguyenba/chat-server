@@ -7,11 +7,11 @@ var db = require('./dynamodb.js');
 module.exports = function(callback) {
     console.log("Importing messages into DynamoDB. Please wait.");
 
-    var allMessages = JSON.parse(fs.readFileSync('./scripts/user-data.json', 'utf8'));
+    var allMessages = JSON.parse(fs.readFileSync('./scripts/manager-data.json', 'utf8'));
     allMessages.forEach(function(user) {
 
         var params = {
-            TableName: "User",
+            TableName: "Manager",
             Item: user
         };
 
@@ -24,7 +24,7 @@ module.exports = function(callback) {
 
             db.docClient.put(params, function(err, data) {
                 if (err) {
-                    console.error("Unable to add user", user.name, ". Error JSON:", JSON.stringify(err, null, 2));
+                    console.error("Unable to add manager", user.name, ". Error JSON:", JSON.stringify(err, null, 2));
                 } else {
                     console.log("PutItem succeeded:", user.name);
                 }

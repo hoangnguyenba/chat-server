@@ -1,0 +1,15 @@
+[
+    {
+        "id" : "kachidoki",
+        "password": "kachidoki",
+        "name"    : "Kachidoki",
+        "user_type": 1,
+        "threads": ["general"]
+    },
+    {
+        "id" : "kachidoki2",
+        "password": "kachidoki2",
+        "name"    : "Kachidoki2",
+        "user_type": 1
+    }
+]

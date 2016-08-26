@@ -2,24 +2,12 @@
 "use strict";
 
 import * as express from "express";
-import { UserModel } from "../models/user";
+import { ManagerModel } from "../models/manager";
 import { auth, getToken } from "../middlewares/auth";
 
 import * as jwt from "jsonwebtoken";
 
 var router = express.Router();
-
-router.get("/online", auth, function(req: express.Request, res: express.Response) {
-
-    var userModel = new UserModel();
-
-    userModel.getListUserOnline(function(error: any, result: any) {
-        if (error) {
-            return res.status(400).send(error);
-        }
-        return res.send(result);
-    });
-});
 
 router.post("/search", auth, function(req: express.Request, res: express.Response) {
 
@@ -27,7 +15,7 @@ router.post("/search", auth, function(req: express.Request, res: express.Respons
         key: req.body.key
     };
 
-    var userModel = new UserModel();
+    var userModel = new ManagerModel();
 
     userModel.search(params, function(error: any, result: any) {
         if (error) {
@@ -48,7 +36,7 @@ router.get("/options", auth, function(req: express.Request, res: express.Respons
         ]
     };
 
-    var userModel = new UserModel();
+    var userModel = new ManagerModel();
 
     userModel.find(params, function(error: any, result: any) {
         if (error) {
@@ -70,36 +58,13 @@ router.post("/options", auth, function(req: express.Request, res: express.Respon
         }
     };
 
-    var userModel = new UserModel();
+    var userModel = new ManagerModel();
 
     userModel.setOptions(params, function(error: any, result: any) {
         if (error) {
             return res.status(400).send({status: false, error: error});
         }
         return res.send({status: true});
-    });
-});
-
-router.get("/recent", auth, function(req: express.Request, res: express.Response) {
-
-    var params = {
-        TableName: "User",
-        ProjectionExpression: "#id, #name, #status, last_message, last_message_time",
-        ExpressionAttributeNames: {
-                    "#name": "name",
-                    "#id": "id",
-                    "#status": "status"
-                },
-        FilterExpression: "attribute_exists (last_message)"
-    };
-
-    var userModel = new UserModel();
-
-    userModel.findAll(params, function(error: any, result: any) {
-        if (error) {
-            return res.status(400).send(error);
-        }
-        return res.send(result);
     });
 });
 
@@ -113,9 +78,30 @@ router.get("/:id", auth, function(req: express.Request, res: express.Response) {
         ]
     };
 
-    var userModel = new UserModel();
+    var userModel = new ManagerModel();
 
     userModel.find(params, function(error: any, result: any) {
+        if (error) {
+            return res.status(400).send(error);
+        }
+        return res.send(result);
+    });
+});
+
+
+router.get("/", auth, function(req: express.Request, res: express.Response) {
+
+    var params = {
+        AttributesToGet: [
+            "id",
+            "name",
+            "status"
+        ]
+    };
+
+    var managerModel = new ManagerModel();
+
+    managerModel.findAll(params, function(error: any, result: any) {
         if (error) {
             return res.status(400).send(error);
         }

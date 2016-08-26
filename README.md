@@ -13,8 +13,10 @@ In your project directory, run:
 ```bash
 npm run db all init
 ```
-
 to create table and add sample data
+
+If you have error about "credentials".
+>http://docs.aws.amazon.com/AWSSdkDocsNET/V2/DeveloperGuide/net-dg-config-creds.html
 
 ## Install npm packages and start your server
 
@@ -22,6 +24,12 @@ Install the npm packages described in the `package.json` and verify that it work
 
 ```bash
 npm install
+```
+
+Install the tsd packages described in the `tsd.json`
+
+```bash
+tsd install
 ```
 
 Compile source from typescript to es6

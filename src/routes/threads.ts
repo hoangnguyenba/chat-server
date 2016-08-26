@@ -19,7 +19,7 @@ router.get("/", auth, function(req: express.Request, res: express.Response) {
 
     var threadModel = new ThreadModel();
 
-    threadModel.getThreadsOfUser(params, function(error: any, result: any) {
+    threadModel.getThreadsOfManager(params, function(error: any, result: any) {
         if (error) {
             return res.status(400).send(error);
         }
